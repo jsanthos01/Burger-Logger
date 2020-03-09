@@ -50,9 +50,15 @@ async function devouredBurger(burgerId){
     console.log(updateBurgerState);
 }
 
+async function getdevourededBurger(){
+    const getBurger = await db.query("SELECT * FROM burgerNames wHERE devoured=1");
+    console.log("Burger devoured gotten");
+    return getBurger;
+}
 module.exports = {
     saveBurgerName,
     getBurgerName,
     devouredBurger,
+    getdevourededBurger
 
 }
