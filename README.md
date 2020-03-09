@@ -8,7 +8,6 @@ This is a mini burger logger application that uses MySQL, Node, Express, Handleb
 * npm init 
 * npm i express
 * npm i mysql
-
 ```
 
 ## Preview 

@@ -5,7 +5,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
-
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -16,34 +17,56 @@
                 text-align: center;
                 font-family: 'Fira Sans', sans-serif;
             }
+
+            .searchSection{
+                display: flex;
+                justify-content: center;
+            }
+
+            .searchSection button{
+                margin: 35px;
+            }
+
+            .jumbotron img{
+                border-radius: 50%;
+                margin: 35px;
+                padding: 5px;
+                background-color: white;
+            }
+
+            .inputBurger{
+                margin-bottom: 45px;
+            }
+
+            .inputBurger .row {
+                display: flex;
+                justify-content: space-around;
+            }
         </style>
         <div class="jumbotron jumbotron-fluid" style="background-color: rgb(255, 216, 143)">
             <div class="container">
-                <img src="assets/burger.png" alt="" width="20%" class="row mx-auto" style="background-color: white; padding: 10px; border-radius: 50%;">
+                <img src="assets/burger.png" alt="" width="20%" class="row mx-auto">
                 <h1 class="display-4" style="font-weight: bold;">BURGER LOGGER</h1>
                 <p class="lead">Add all your favourite burger meals right here! Click the submit button to store your delicious burger menus.</p>
+                <i class="fas fa-angle-double-down fa-4x"></i>
             </div>
         </div>
-    
+   
         <div class="container mb-4">
-            <div class="col-lg-6 mx-auto row">
+            <div class="col-lg-6 mx-auto row searchSection">
                 <input type="text" placeholder="Add the burger of your choice here!!" class="form-control" id="burgerText"/>
-                <button class="btn btn-outline-warning" class="form-control" id="submitBtn">Submit</button>
+                <button class="btn btn-danger" class="form-control" id="submitBtn">Submit</button>
             </div>
         </div> 
-
+        
         <div class="container inputBurger">
             <div class="row">
-                <div class="col-lg-6" style="background-color: red;">
-                    <div class="input-group mb-3">
-                        <div class="input-group-append">
-                            <div class="list-group " id="appendBurger">
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-lg-6" style="background-color: rgb(246, 247, 189)">
+                    <ul class="input-group mb-3" id="appendBurger">
+                    </ul>
                 </div>
-                <div class="col-lg-6" style="background-color: green;" id="devouredBurgers">
-                    <ul class="list-group devouredBurgers">
+                <div class="col-lg-6" style="background-color:rgb(233, 233, 233)">
+                    <ul class="list-group " id="devouredBurgers">
                     </ul>
                 </div>
             </div>
@@ -68,11 +91,15 @@
 
                     getBurgerName.forEach( (burger) => {
                         $("#appendBurger").append(
-                            ` 
-                            <div id="burger${burger.id}">
-                                <li class="list-group-item">${burger.name}</li>
-                                <button class="btn btn-outline-secondary" type="button" onClick="devourBtn('${burger.id}')" >Devour Me</button>
-                            </div>
+                            `
+                            <div class="input-group mb-3" id="burger${burger.id}">
+                                <li class="list-group-item form-control">${burger.name}</li>
+                                <div class="input-group-append">
+                                    <button class="btn btn-outline-danger" type="button" onClick="devourBtn('${burger.id}')">
+                                        Devour it!!
+                                    </button>
+                                </div>
+                            </div> 
                             `
                         )
                     });
@@ -94,7 +121,7 @@
 
                 getUpdatedBurger.forEach( (burger) => { 
                     $("#devouredBurgers").append(
-                        ` 
+                        `
                             <li class="list-group-item">${burger.name}</li>
                         `
                     )
