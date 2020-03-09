@@ -33,8 +33,11 @@ const db = new Database({
     database: "burgerLog" 
 });
 
-
+async function saveBurgerName(userBurger){
+    const burgerSqlSave = await db.query("INSERT INTO burgerNames(name) VALUES(?)", [userBurger.name]);
+    console.log(burgerSqlSave[0]);
+}
 
 module.exports = {
-    
+    saveBurgerName
 }
