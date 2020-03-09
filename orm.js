@@ -38,6 +38,13 @@ async function saveBurgerName(userBurger){
     console.log(burgerSqlSave[0]);
 }
 
+async function getBurgerName(){
+    const getBurgerNameSql = await db.query("SELECT * FROM burgerNames wHERE devoured=0");
+    console.log(getBurgerNameSql);
+    return getBurgerNameSql;
+}
+
 module.exports = {
-    saveBurgerName
+    saveBurgerName,
+    getBurgerName
 }

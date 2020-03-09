@@ -16,6 +16,14 @@ app.post("/api/burgerChoice", async function(req, res){
 
 });
 
+
+app.get("/api/burgerChoice", async function(req, res){
+    const getBurger = await orm.getBurgerName();
+    res.send(getBurger);
+
+});
+
+
 app.listen( PORT, function(){
     console.log( `[burger] RUNNING, http://localhost:${PORT}` );
 });
