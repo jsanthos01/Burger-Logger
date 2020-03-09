@@ -44,7 +44,15 @@ async function getBurgerName(){
     return getBurgerNameSql;
 }
 
+async function devouredBurger(burgerId){
+    const updateBurgerState = await db.query("UPDATE burgerNames SET devoured=? WHERE id=?", [true, burgerId]);
+    console.log("Burger stated updated")
+    console.log(updateBurgerState);
+}
+
 module.exports = {
     saveBurgerName,
-    getBurgerName
+    getBurgerName,
+    devouredBurger,
+
 }
