@@ -16,28 +16,6 @@ app.post("/api/burgerChoice", async function(req, res){
 
 });
 
-
-app.get("/api/burgerChoice", async function(req, res){
-    const getBurger = await orm.getBurgerName();
-    res.send(getBurger);
-
-});
-
-app.put("/api/burgerUpdate/:id", async function(req, res){
-    console.log(req.params.id)
-    const updateBurger = await orm.devouredBurger(req.params.id);
-
-    res.send("Success!!")
-
-});
-
-//getting the updated burgerInfo
-app.get("/api/updatedBurger", async function(req, res){
-    const getUpdated = await orm.getdevourededBurger();
-    res.send(getUpdated)
-});
-
-
 app.listen( PORT, function(){
     console.log( `[burger] RUNNING, http://localhost:${PORT}` );
 });
