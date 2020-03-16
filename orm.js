@@ -35,7 +35,7 @@ if(process.env.JAWSDB_URL){
         port: 3306,
         user: "root",
         password: "bootcamp2020", //change 
-        database: "fitness_diaries"
+        database: "burger_logger"
     });
 };
 
