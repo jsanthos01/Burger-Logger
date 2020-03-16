@@ -1,6 +1,5 @@
 const mysql = require("mysql");
 
-//connection to my sql
 class Database {
     constructor( config ) {
         this.connection = mysql.createConnection( config );
@@ -25,13 +24,20 @@ class Database {
     }
 }
 
-const db = new Database({
-    host: "localhost",
-    port: 3306,
-    user: "root",
-    password: "bootcamp2020",
-    database: "burgerLog" 
-});
+// at top INIT DB connection
+var db;
+if(process.env.JAWSDB_URL){
+     db = new Database(process.env.JAWSDB_URL);
+     console.log('jaws db is connected');
+}else{
+     db = new Database({
+        host: "localhost",
+        port: 3306,
+        user: "root",
+        password: "bootcamp2020", //change 
+        database: "fitness_diaries"
+    });
+};
 
 async function saveBurgerName(userBurger){
     const burgerSqlSave = await db.query("INSERT INTO burgerNames(name) VALUES(?)", [userBurger.name]);
