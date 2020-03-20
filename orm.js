@@ -35,7 +35,7 @@ if(process.env.JAWSDB_URL){
         port: 3306,
         user: "root",
         password: "bootcamp2020", //change 
-        database: "burger_logger"
+        database: "burgerlog"
     });
 };
 
@@ -57,14 +57,20 @@ async function devouredBurger(burgerId){
 }
 
 async function getdevourededBurger(){
-    const getBurger = await db.query("SELECT * FROM burgerNames wHERE devoured=1");
+    const getBurger = await db.query("SELECT * FROM burgerNames WHERE devoured=1");
     console.log("Burger devoured gotten");
     return getBurger;
+}
+async function deletedevourededBurger(id){
+    const deleteBurger = await db.query("DELETE FROM burgerNames WHERE id=? AND devoured=1" , [id]);
+    console.log("Burger devoured deleted");
+    return deleteBurger;
 }
 module.exports = {
     saveBurgerName,
     getBurgerName,
     devouredBurger,
-    getdevourededBurger
+    getdevourededBurger,
+    deletedevourededBurger
 
 }

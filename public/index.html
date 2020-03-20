@@ -74,6 +74,40 @@
     
         <script>
             $(document).ready(async function(){
+                //if page refreshed, show the current information 
+                const getBurgerName = await $.get("/api/burgerChoice");
+                $("#appendBurger").html("");
+
+                getBurgerName.forEach( (burger) => {
+                    $("#appendBurger").append(
+                        `
+                        <div class="input-group mb-3" id="burger${burger.id}">
+                            <li class="list-group-item form-control">${burger.name}</li>
+                            <div class="input-group-append">
+                                <button class="btn btn-outline-danger" type="button" onClick="devourBtn('${burger.id}')">
+                                    Devour it!!
+                                </button>
+                            </div>
+                        </div> 
+                        `
+                    )
+                });
+
+                $("#burgerText").html();
+
+                const getUpdatedBurger = await $.get("/api/updatedBurger");
+                $("#devouredBurgers").html("");
+
+                getUpdatedBurger.forEach( (burger) => { 
+                    $("#devouredBurgers").append(
+                        `
+                            <li class="list-group-item">${burger.name}</li>
+                        `
+                    )
+                });
+
+
+                //If submit btn clicked
                 $("#submitBtn").on("click", async function(event){
                     event.preventDefault();
 
@@ -124,11 +158,38 @@
                 getUpdatedBurger.forEach( (burger) => { 
                     $("#devouredBurgers").append(
                         `
-                            <li class="list-group-item">${burger.name}</li>
+                        <div>
+                            <li class="list-group-item" id="${burger.id}">${burger.name}  
+                                <i onclick="deleteBurger(${burger.id})" class=" fa fa-trash-o fa-lg" aria-hidden="true"></i> 
+                            </li>
+                        </div>
                         `
                     )
                 });
             };
+
+            async function deleteBurger(id){
+                console.log("I am clicked  = DELETE")
+                const apiResult = await $.ajax({
+                    url: `/api/burgerDelete/${id}`,
+                    type: "DELETE"
+                });
+                //get the updated info from database and append
+                const getUpdatedBurger = await $.get("/api/updatedBurger");
+                $("#devouredBurgers").html("");
+
+                getUpdatedBurger.forEach( (burger) => { 
+                    $("#devouredBurgers").append(
+                        `
+                        <div>
+                            <li class="list-group-item" id="${burger.id}">${burger.name}  
+                                <i onclick="deleteBurger(${burger.id})" class=" fa fa-trash-o fa-lg" aria-hidden="true"></i> 
+                            </li>
+                        </div>
+                        `
+                    )
+                });
+            }
         </script>
     </body>
 </html>
