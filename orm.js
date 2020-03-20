@@ -66,11 +66,11 @@ async function deletedevourededBurger(id){
     console.log("Burger devoured deleted");
     return deleteBurger;
 }
+
 module.exports = {
     saveBurgerName,
     getBurgerName,
     devouredBurger,
     getdevourededBurger,
     deletedevourededBurger
-
 }
